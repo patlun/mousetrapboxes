@@ -78,7 +78,7 @@ module top (in_length, in_width, in_heigth){
 
     difference () {
         cuboid([length, width, heigth], anchor=BOTTOM, rounding=wallthickness/2);
-        move([wallthickness, 0, wallthickness+0.1])cuboid([length, in_width, in_heigth], anchor=BOTTOM, rounding=1.5, except=TOP);
+        move([wallthickness, 0, wallthickness+0.1])cuboid([length, innerwidth, innerheigth], anchor=BOTTOM, rounding=1.5, except=TOP);
     };
     move([length/2+wallthickness/2, 0, frontlength/2])
         yrot(270) front(frontlength, width, frontheigth);
@@ -91,11 +91,12 @@ module top_for_pins (in_length, in_width, in_heigth){
     innerlength=in_length+wallthickness2+clearance;
     innerwidth=in_width + wallthickness+2;
     length=innerlength+wallthickness;  // 1 wall
-    heigth=topheigth+wallthickness;  // 1 wall
+    heigth=topheigth+wallthickness;    // 1 wall
+    width=innerwidth+wallthickness*2;  // 2 walls
     difference () {
         top(in_length, in_width, in_heigth);
-        move([length/2-lockplacementX, 0, lockplacementZ /*heigth+lockplacementX*/]) 
-            ycyl(d=8.5, l=innerwidth+1);
+        move([length/2-lockplacementX, 0, lockplacementZ]) 
+            ycyl(d=8.5, l=width+1);
     };
 };
 
