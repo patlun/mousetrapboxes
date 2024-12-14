@@ -2,14 +2,22 @@ include <BOSL2/std.scad>
 include <mousetrap_common.scad>
 $fn=32;
 
-// What to generate - bottom, top
-generate = "top"; 
+
+// Generate top or bottom with a simple locking mechanism to hold the top in place, change variables to get the result you like
+
+// What to generate - Valid values: bottom, top
+generate = "bottom"; 
 
 // measurements inside of box
-innerlength=110;
-innerheigth=55;
-innerwidth=52;
 
+// Length in millimeter
+innerlength=110;
+//Width  in millimeter
+innerwidth=52;
+// Height in millimeter
+innerheigth=55;
+
+// The number of hole rows in bottom part
 number_of_hole_rows=4;
 // Number of holes at lowest row
 number_of_holes_bottom_row=10; 
