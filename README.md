@@ -7,5 +7,5 @@ The box also gives some protection from snow and ice if you place the trap outdo
 
 The box have two parts called bottom and top as shown below
 
-[Bottom part](../images/mouse_plain_bottom.png)
-[Top part](../images/mouse_plain_top.png)
+[Bottom part](images/mouse_plain_bottom.png)
+[Top part](images/mouse_plain_top.png)
