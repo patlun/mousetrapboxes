@@ -12,13 +12,12 @@ wallthickness=1.2;
 wallthickness2=wallthickness*2+clearance;
 // Some variables for the locks
 lockheight=wallthickness+1.5; // Giving some play room
+lockplacement=16; // from top of bottom part
 pindiameter=8;
 hatdiameter=10.5;
 // The height of the opening at the bottom 
 frontopening=30;
 topheigth=8;// Inner height of top box + ?
-
-
 
 // For setting file local variables to same value as the ones in this file
 //function get_wallthickness () = 1.2;
@@ -28,7 +27,7 @@ module bottom (in_length, in_width, in_heigth, in_number_of_hole_rows, in_number
 {
     assert(in_length > 0, "Length need to be greater than 0");
     assert(in_width > 0, "Width need to be greater than 0");
-    assert(in_heigth > 0, "Height need to be greater than 0");
+    assert(in_heigth > frontopening, str("Height need to be greater than frontopening (", frontopening, ") mm") );
     
     length=in_length+wallthickness;  // 1 wall
     heigth=in_heigth+wallthickness-0.01;  // 1 wall
@@ -52,11 +51,11 @@ module bottom_w_pins (in_length, in_width, in_heigth, in_number_of_hole_rows, in
     heigth=in_heigth+wallthickness-0.01;  // 1 wall
     width=in_width+wallthickness*2; 
 
-    topinnerheigth=8; // see mus_top_loc.scad
+    topinnerheigth=8; 
     lockplacementX=length/2 - topinnerheigth;
     lockplacementY=width/2+lockheight/2;
-    lockplacementZ=heigth-((in_heigth-frontopening)-topinnerheigth-wallthickness); 
-
+//lockplacementZ=heigth-((in_heigth-frontopening)-topinnerheigth-wallthickness); 
+    lockplacementZ=heigth-lockplacement; 
     bottom (in_length, in_width, in_heigth, in_number_of_hole_rows, in_number_of_holes_bottom_row);
 
     move([lockplacementX, lockplacementY, lockplacementZ]) rlock();
@@ -66,33 +65,36 @@ module bottom_w_pins (in_length, in_width, in_heigth, in_number_of_hole_rows, in
 module top (in_length, in_width, in_heigth){
     assert(in_length > 0, "Length need to be greater than 0");
     assert(in_width > 0, "Width need to be greater than 0");
-    assert(in_heigth > 0, "Height need to be greater than 0");
+    assert(in_heigth > frontopening, str("Height need to be greater than frontopening (", frontopening, ") mm") );
     
     innerlength=in_length+wallthickness2+clearance;
     innerwidth=in_width + wallthickness+2;
     length=innerlength+wallthickness;  // 1 wall
     heigth=topheigth+wallthickness;  // 1 wall
-
+    width=innerwidth+wallthickness*2;   // 2 walls
     frontlength=in_heigth-frontopening; 
     frontheigth=topheigth+3;
-   
+    
+
     difference () {
-        cuboid([length, innerwidth, heigth], anchor=BOTTOM, rounding=wallthickness/2);
+        cuboid([length, width, heigth], anchor=BOTTOM, rounding=wallthickness/2);
         move([wallthickness, 0, wallthickness+0.1])cuboid([length, in_width, in_heigth], anchor=BOTTOM, rounding=1.5, except=TOP);
     };
     move([length/2+wallthickness/2, 0, frontlength/2])
-        yrot(270) front(frontlength, innerwidth, frontheigth);
+        yrot(270) front(frontlength, width, frontheigth);
 };
 
 module top_for_pins (in_length, in_width, in_heigth){
     lockplacementX=8;
+    // Z, measure from bottom, don't forget the wallthickness
+    lockplacementZ=lockplacement+wallthickness;
     innerlength=in_length+wallthickness2+clearance;
     innerwidth=in_width + wallthickness+2;
     length=innerlength+wallthickness;  // 1 wall
     heigth=topheigth+wallthickness;  // 1 wall
     difference () {
         top(in_length, in_width, in_heigth);
-        move([length/2-lockplacementX, 0, heigth+lockplacementX]) 
+        move([length/2-lockplacementX, 0, lockplacementZ /*heigth+lockplacementX*/]) 
             ycyl(d=8.5, l=innerwidth+1);
     };
 };
