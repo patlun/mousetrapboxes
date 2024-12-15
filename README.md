@@ -27,10 +27,10 @@ Open the file mouse.scad in Openscad and either edit directly or use the Customi
 
 There is stl files for the top and bottom with and without locking mechanism in the stl directory
 
--[Small mouse trap top and bottom](src/mouse.scad)
--[Small mouse trap top and bottom with locking](src/mouse_w_lock.scad)
--[Mjölner mouse trap top and bottom](src/Mjölner.scad)
--[Mjölner mouse trap top and bottom with locking](src/Mjölner_w_lock.scad)
+- [Small mouse trap top and bottom](src/mouse.scad)
+- [Small mouse trap top and bottom with locking](src/mouse_w_lock.scad)
+- [Mjölner mouse trap top and bottom](src/Mjölner.scad)
+- [Mjölner mouse trap top and bottom with locking](src/Mjölner_w_lock.scad)
 
 You can use the customier to set the measurerments you need.
 
