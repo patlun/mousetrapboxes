@@ -1,4 +1,3 @@
-include <BOSL2/std.scad>
 include <mousetrap_common.scad>
 $fn=32;
 
