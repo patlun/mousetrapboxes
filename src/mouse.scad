@@ -13,7 +13,7 @@ innerlength=110;
 //Width  in millimeter
 innerwidth=52;
 // Height in millimeter
-innerheigth=55;
+innerheight=55;
 
 // The number of hole rows in bottom part
 number_of_hole_rows=4;
@@ -21,9 +21,9 @@ number_of_hole_rows=4;
 number_of_holes_bottom_row=10; 
 
 if (generate == "bottom")
-    bottom (innerlength, innerwidth, innerheigth, number_of_hole_rows, number_of_holes_bottom_row);
+    bottom (innerlength, innerwidth, innerheight, number_of_hole_rows, number_of_holes_bottom_row);
 else if (generate == "top")
-    top(innerlength, innerwidth, innerheigth);
+    top(innerlength, innerwidth, innerheight);
 else
   echo ("Need to give some input");
   

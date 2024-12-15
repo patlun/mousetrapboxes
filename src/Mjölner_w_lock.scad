@@ -15,7 +15,7 @@ innerlength=140;
 //Width  in millimeter
 innerwidth=52;
 // Height in millimeter
-innerheigth=110;
+innerheight=110;
 
 // The number of hole rows in bottom part
 number_of_hole_rows=6;
@@ -23,9 +23,9 @@ number_of_hole_rows=6;
 number_of_holes_bottom_row=12; 
 
 if (generate == "bottom")
-    bottom_w_pins (innerlength, innerwidth, innerheigth, number_of_hole_rows, number_of_holes_bottom_row);
+    bottom_w_pins (innerlength, innerwidth, innerheight, number_of_hole_rows, number_of_holes_bottom_row);
 else if (generate == "top")
-    top_for_pins(innerlength, innerwidth, innerheigth);
+    top_for_pins(innerlength, innerwidth, innerheight);
 else
   echo ("Need to give some input");
   

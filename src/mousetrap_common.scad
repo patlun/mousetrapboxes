@@ -1,10 +1,17 @@
 include <BOSL2/std.scad>
 $fn=32;
 
+/*
+
+Common variables and modules included in the other scad files
+
+*/
+
+
 // Constants and common variables
 holecc=10;
-rowheigth=holecc;
-startheigth=rowheigth;
+rowheight=holecc;
+startheight=rowheight;
 holesdiff=2; // number of rows to subtract per row 
 holediameter=4;
 clearance=0.25; // Some wiggle room for top
@@ -17,27 +24,27 @@ pindiameter=8;
 hatdiameter=10.5;
 // The height of the opening at the bottom 
 frontopening=30;
-topheigth=8;// Inner height of top box + ?
+topheight=8;// Inner height of top box + ?
 
 // For setting file local variables to same value as the ones in this file
 //function get_wallthickness () = 1.2;
 
 // Create the bottom box including holes
-module bottom (in_length, in_width, in_heigth, in_number_of_hole_rows, in_number_of_holes_bottom_row)
+module bottom (in_length, in_width, in_height, in_number_of_hole_rows, in_number_of_holes_bottom_row)
 {
     assert(in_length > 0, "Length need to be greater than 0");
     assert(in_width > 0, "Width need to be greater than 0");
-    assert(in_heigth > frontopening, str("Height need to be greater than frontopening (", frontopening, ") mm") );
+    assert(in_height > frontopening, str("Height need to be greater than frontopening (", frontopening, ") mm") );
     
     length=in_length+wallthickness;  // 1 wall
-    heigth=in_heigth+wallthickness-0.01;  // 1 wall
+    height=in_height+wallthickness-0.01;  // 1 wall
     width=in_width+wallthickness*2;  // 2 walls 
     holestart=-in_length/2;
     holerowmovement=width/2;
 
     difference () {
-        cuboid([length, width, heigth], anchor=BOTTOM, rounding=wallthickness/2);
-        move([wallthickness, 0, wallthickness])cuboid([in_length, in_width, in_heigth], anchor=BOTTOM, rounding=1.5, except=TOP);
+        cuboid([length, width, height], anchor=BOTTOM, rounding=wallthickness/2);
+        move([wallthickness, 0, wallthickness])cuboid([in_length, in_width, in_height], anchor=BOTTOM, rounding=1.5, except=TOP);
         ymove(holerowmovement) sideholes(holestart, in_number_of_holes_bottom_row, in_number_of_hole_rows);
         ymove(-holerowmovement)sideholes(holestart, in_number_of_holes_bottom_row, in_number_of_hole_rows);
         back(in_number_of_hole_rows, width, length);
@@ -45,66 +52,66 @@ module bottom (in_length, in_width, in_heigth, in_number_of_hole_rows, in_number
 };
 
 // Bottom with ears for hinges/lock
-module bottom_w_pins (in_length, in_width, in_heigth, in_number_of_hole_rows, in_number_of_holes_bottom_row)
+module bottom_w_pins (in_length, in_width, in_height, in_number_of_hole_rows, in_number_of_holes_bottom_row)
 {
     length=in_length+wallthickness;  // 1 wall
-    heigth=in_heigth+wallthickness-0.01;  // 1 wall
+    height=in_height+wallthickness-0.01;  // 1 wall
     width=in_width+wallthickness*2; 
 
-    topinnerheigth=8; 
-    lockplacementX=length/2 - topinnerheigth;
+    topinnerheight=8; 
+    lockplacementX=length/2 - topinnerheight;
     lockplacementY=width/2+lockheight/2;
-//lockplacementZ=heigth-((in_heigth-frontopening)-topinnerheigth-wallthickness); 
-    lockplacementZ=heigth-lockplacement; 
-    bottom (in_length, in_width, in_heigth, in_number_of_hole_rows, in_number_of_holes_bottom_row);
+//lockplacementZ=height-((in_height-frontopening)-topinnerheight-wallthickness); 
+    lockplacementZ=height-lockplacement; 
+    bottom (in_length, in_width, in_height, in_number_of_hole_rows, in_number_of_holes_bottom_row);
 
     move([lockplacementX, lockplacementY, lockplacementZ]) rlock();
     move([lockplacementX, -lockplacementY, lockplacementZ]) llock();
 };
 
-module top (in_length, in_width, in_heigth){
+module top (in_length, in_width, in_height){
     assert(in_length > 0, "Length need to be greater than 0");
     assert(in_width > 0, "Width need to be greater than 0");
-    assert(in_heigth > frontopening, str("Height need to be greater than frontopening (", frontopening, ") mm") );
+    assert(in_height > frontopening, str("Height need to be greater than frontopening (", frontopening, ") mm") );
     
     innerlength=in_length+wallthickness2+clearance;
     innerwidth=in_width + wallthickness+2;
     length=innerlength+wallthickness;  // 1 wall
-    heigth=topheigth+wallthickness;  // 1 wall
+    height=topheight+wallthickness;  // 1 wall
     width=innerwidth+wallthickness*2;   // 2 walls
-    frontlength=in_heigth-frontopening; 
-    frontheigth=topheigth+3;
+    frontlength=in_height-frontopening; 
+    frontheight=topheight+3;
     
 
     difference () {
-        cuboid([length, width, heigth], anchor=BOTTOM, rounding=wallthickness/2);
-        move([wallthickness, 0, wallthickness+0.1])cuboid([length, innerwidth, innerheigth], anchor=BOTTOM, rounding=1.5, except=TOP);
+        cuboid([length, width, height], anchor=BOTTOM, rounding=wallthickness/2);
+        move([wallthickness, 0, wallthickness+0.1])cuboid([length, innerwidth, innerheight], anchor=BOTTOM, rounding=1.5, except=TOP);
     };
     move([length/2+wallthickness/2, 0, frontlength/2])
-        yrot(270) front(frontlength, width, frontheigth);
+        yrot(270) front(frontlength, width, frontheight);
 };
 
-module top_for_pins (in_length, in_width, in_heigth){
+module top_for_pins (in_length, in_width, in_height){
     lockplacementX=8;
     // Z, measure from bottom, don't forget the wallthickness
     lockplacementZ=lockplacement+wallthickness;
     innerlength=in_length+wallthickness2+clearance;
     innerwidth=in_width + wallthickness+2;
     length=innerlength+wallthickness;  // 1 wall
-    heigth=topheigth+wallthickness;    // 1 wall
+    height=topheight+wallthickness;    // 1 wall
     width=innerwidth+wallthickness*2;  // 2 walls
     difference () {
-        top(in_length, in_width, in_heigth);
+        top(in_length, in_width, in_height);
         move([length/2-lockplacementX, 0, lockplacementZ]) 
             ycyl(d=8.5, l=width+1);
     };
 };
 
-module front(in_length, in_width, in_heigth) {
+module front(in_length, in_width, in_height) {
     difference() {
-        cuboid([in_length, in_width, in_heigth], anchor=BOTTOM, rounding=wallthickness/2);
+        cuboid([in_length, in_width, in_height], anchor=BOTTOM, rounding=wallthickness/2);
         move([wallthickness, 0, wallthickness]) 
-            cuboid([in_length, in_width-(wallthickness*2)-2*clearance, in_heigth], anchor=BOTTOM, rounding=wallthickness/2);
+            cuboid([in_length, in_width-(wallthickness*2)-2*clearance, in_height], anchor=BOTTOM, rounding=wallthickness/2);
   };
 };
 
@@ -118,14 +125,14 @@ module back (in_holerows,
     startingplacement=round(in_width/holes_per_row)/2;
     cc=in_width/holes_per_row;
     for ( i = [0:1:in_holerows - 1])  
-        zrot(90) move([-in_width/2, in_length/2-wallthickness/2, startheigth+(rowheigth*i)]) xrot(90) holerow(holes_per_row, startingplacement, cc);
+        zrot(90) move([-in_width/2, in_length/2-wallthickness/2, startheight+(rowheight*i)]) xrot(90) holerow(holes_per_row, startingplacement, cc);
 };
 
 // Add holes to the sides 
 module sideholes(in_holestart, in_start_no_of_holes, in_holerows) {
    startingplacement=10;
     for ( i = [0:1:in_holerows - 1 ]) 
-        move([in_holestart, 0, startheigth+(rowheigth*i)]) xrot(90)  holerow(in_start_no_of_holes-(holesdiff*i), startingplacement);     
+        move([in_holestart, 0, startheight+(rowheight*i)]) xrot(90)  holerow(in_start_no_of_holes-(holesdiff*i), startingplacement);     
 };
 
 // Create one rows of holes

@@ -10,7 +10,7 @@ The box have two parts called bottom and top as shown below
 ![Bottom part](images/mouse_plain_bottom.png)
 ![Top part](images/mouse_plain_top.png)
 
-The box above is created with mouse.scad. There is also a modified version that have a simple mechanism for holdingor locking the top in place called mouse_w_lock.scad.
+The box above is created with mouse.scad. There is also a modified version that have a simple mechanism for holding or locking the top in place called mouse_w_lock.scad.
 
 ![Bottom part with lock](images/mouse_plain_bottom.png)
 
@@ -26,3 +26,17 @@ Open the file mouse.scad in Openscad and either edit directly or use the Customi
 # Stl
 
 There is stl files for the top and bottom with and without locking mechanism in the stl directory
+
+[Small mouse trap top and bottom](src/mouse.scad)
+[Small mouse trap top and bottom with locking](src/mouse_w_lock.scad)
+[Mjölner mouse trap top and bottom](src/Mjölner.scad)
+[Mjölner mouse trap top and bottom with locking](src/Mjölner_w_lock.scad)
+
+You can use the customier to set the measurerments you need.
+
+# Printing
+
+I have used Sunlu PETG for printing as I use my boxes outdoors. I sliced with Orcaslicer using
+- Creality Generic PETG settings
+- 0.3mm layer height
+- Manual tree support for the locks to save material, auto support creates supports for the holes in the sides.
