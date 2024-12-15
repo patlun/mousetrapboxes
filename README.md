@@ -12,7 +12,7 @@ The box have two parts called bottom and top as shown below
 
 The box above is created with mouse.scad. There is also a modified version that have a simple mechanism for holdingor locking the top in place called mouse_w_lock.scad.
 
-![Bottom part with lock](images/images/mouse_plain_bottom.png)
+![Bottom part with lock](images/mouse_plain_bottom.png)
 
 # Usage
 
