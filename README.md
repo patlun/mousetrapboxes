@@ -23,9 +23,9 @@ The box above is created with mouse.scad. There is also a modified version that 
 ## Execution
 Open the file mouse.scad in Openscad and either edit directly or use the Customizer. The defaults gives a box for a standard Swedish mouse trap. 
 
-# Stl
+# Scad files
 
-There is stl files for the top and bottom with and without locking mechanism in the stl directory
+There is some files using a common file (mousetrap_common.scad, the provided files gives the ability to create bottom and top for normal Swedish mouse traps and Mjölner mouse traps with and with out locking mechanism.
 
 - [Small mouse trap top and bottom](src/mouse.scad)
 - [Small mouse trap top and bottom with locking](src/mouse_w_lock.scad)
@@ -33,6 +33,11 @@ There is stl files for the top and bottom with and without locking mechanism in 
 - [Mjölner mouse trap top and bottom with locking](src/Mjölner_w_lock.scad)
 
 You can use the customier to set the measurerments you need.
+
+
+# Stl
+
+There is stl files for the top and bottom with and without locking mechanism in the stl directory
 
 # Printing
 
